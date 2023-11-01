@@ -1,0 +1,39 @@
+package com.ezen.myProject.service;
+
+import java.util.List;
+
+import com.ezen.myProject.domain.BoardDTO;
+import com.ezen.myProject.domain.BoardVO;
+import com.ezen.myProject.domain.FileVO;
+import com.ezen.myProject.domain.PagingVO;
+
+public interface BoardService {
+	/*
+	 * int register(BoardVO bvo);
+	 */
+
+	List<BoardVO> getList(PagingVO pgvo);
+
+	BoardVO getDetail(int bno);
+
+	int modify(BoardVO bvo);
+
+	int remove(int bno);
+
+	int getTotalCount(PagingVO pgvo);
+
+	int register(BoardDTO bdto);
+
+	int fileCount(BoardVO bvo);
+
+	int countComment(BoardVO bvo);
+
+	BoardDTO getDetailFile_d(String uuid);
+
+	BoardDTO getDetailFile(int bno);
+
+	int delete(String uuid);
+
+	int modifyFiles(BoardDTO bdto);
+
+}

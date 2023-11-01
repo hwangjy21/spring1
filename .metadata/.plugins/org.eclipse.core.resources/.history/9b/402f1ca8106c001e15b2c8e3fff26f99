@@ -1,0 +1,28 @@
+async function removeFile(uuid) {
+    try {
+        const url = '/board/' + uuid;
+        const config = {
+            method: 'DELETE' // HTTP 메서드는 대문자로 사용
+        };
+        const resp = await fetch(url, config);
+        const result = await resp.text();
+        return result;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('file-x')) {
+        console.log('삭제버튼 클릭');
+        let button = e.target.closest('button');
+        let uuidVal = button.dataset.uuid; // 'detaset'이 아니라 'dataset'을 사용해야 함
+        removeFile(uuidVal).then(result => {
+            if (result == '1') { // 문자열 '1'로 비교
+                alert(' 삭제 성공~!!');
+            } else if (result == '2') { // 문자열 '2'로 비교
+                alert("작성자가 일치하지 않습니다.");
+            }
+        })
+    }
+});

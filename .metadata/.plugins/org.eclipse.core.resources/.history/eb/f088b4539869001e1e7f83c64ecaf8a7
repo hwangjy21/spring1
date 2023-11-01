@@ -1,0 +1,10 @@
+package com.ezen.myProject.handler;
+
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
+@AllArgsConstructor
+@component
+public class FileHandler {
+private final String UP_DIR ="D:\\_myweb_h\\_java\\fileupload";
+}

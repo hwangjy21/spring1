@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+    
+   <mapper namespace="com.ezen.myproject.repository.BoardDAO">
+   
+   <insert id="insert" parameterType="com.ezen.myproject.domain.BoardVO">
+   
+   insert into board(title, writer, content)values(#{title},#{writer},#{content})</insert>
+   
+   <select id="getlist" parameterType="com.ezen.myproject.domain.PagingVO" resultType="com.ezen.myproject.domain.BoardVO">
+   select * from board where isDel ='N' <include refid="search"></include> order by bno desc limit #{pageStart},#{qty}
+   </select>
+   
+      <select id="detail" parameterType="int" resultType="com.ezen.myproject.domain.BoardVO">
+   select * from board where bno=#{bno}
+   </select>
+   
+   
+   <select id="getDetail_c" parameterType="int" resultType="com.ezen.myproject.domain.CommentVO">
+   select * from board where cno=#{cno}
+   </select>
+   <update id="readCount">
+   update board set  read_count=read_count+#{cno} where bno=#{bno}
+   </update>
+   
+   <update id="modify" parameterType="com.ezen.myproject.domain.BoardVO">
+   
+   update board set title=#{title},content=#{content} where bno=#{bno}
+     </update>
+     
+     <delete id="delete" parameterType="int">
+     delete from board  where bno=#{bno}
+     </delete>
+     
+     
+     <select id="getTotalCount" parameterType="com.ezen.myproject.domain.PagingVO" resultType="int">
+     select count(bno) from board  where isDel ='N' 
+    <include refid="search"></include>
+ <!--    	</select>
+     <select id="getPageList" parameterType="com.ezen.myproject.domain.PagingVO" resultType="com.ezen.myproject.domain.PagingVO">
+       	select * from board where bno > 0
+     <include refid="search"></include>
+     </select> -->
+     
+      </select>
+
+	<sql id="search">
+
+		<if test="type!=null">
+			<trim prefix="and(" suffix=")" suffixOverrides="OR">
+				<foreach collection="typeArray" item="type">
+					<trim suffix="OR">
+						<choose>
+
+							<when test="type=='t'.toString()">
+
+								title like concat('%',#{keyword},'%')
+							</when>
+							<when test="type=='c'.toString()">
+
+								content like concat('%',#{keyword},'%')
+							</when>
+							<when test="type=='w'.toString()">
+
+								writer like concat('%',#{keyword},'%')
+							</when>
+						</choose>
+
+					</trim>
+
+				</foreach>
+			</trim>
+
+		</if>
+
+
+	</sql>
+   </mapper>

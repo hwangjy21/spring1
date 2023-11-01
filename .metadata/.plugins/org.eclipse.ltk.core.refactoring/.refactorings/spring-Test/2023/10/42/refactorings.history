@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;spring-Test/src/main/webapp/resources/js/boardM.js&apos; to &apos;boardModify.js&apos;" description="Rename resource &apos;boardM.js&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/webapp/resources/js/boardM.js" name="boardModify.js" stamp="1697446376723" updateReferences="true"/>
+</session>

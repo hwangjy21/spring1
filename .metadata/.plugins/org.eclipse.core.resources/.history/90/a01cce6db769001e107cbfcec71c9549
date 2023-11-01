@@ -1,0 +1,31 @@
+package com.ezen.myProject.repository;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.ezen.myProject.domain.BoardVO;
+import com.ezen.myProject.domain.PagingVO;
+
+public interface BoardDAO {
+
+	int insert(BoardVO bvo);
+
+	List<BoardVO> getList(PagingVO pgvo);
+
+	BoardVO getDetail(int bno);
+
+	void readCount(@Param("bno")int bno, @Param("cnt")int cnt);
+
+	int update(BoardVO bvo);
+
+	int remove(int bno);
+
+	int getTotalCount(PagingVO pgvo);
+
+	int selectBno();
+
+	int c(PagingVO pgvo);
+
+
+}
